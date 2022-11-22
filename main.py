@@ -1,5 +1,5 @@
 from filters import black_white, blur, dilation
-import manage
+#import manage
 
 #manage.open_img("imgs/megumin.jpeg")
 black_white.black_white_img("imgs/megumin.jpeg")
