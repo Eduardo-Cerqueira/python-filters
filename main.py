@@ -1,6 +1,13 @@
 from filters import black_white, blur, dilation
 #import manage
 import os
+import sys
+
+isDirectory = os.path.isdir("output")
+if (isDirectory == False):
+    os.mkdir("output")
+else:
+    print("Directory Exists !")
 
 #manage.open_img("imgs/megumin.jpeg")
 black_white.black_white("imgs/megumin.jpeg")
