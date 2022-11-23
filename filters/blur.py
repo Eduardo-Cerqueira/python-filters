@@ -4,11 +4,11 @@ import os
 
 def blur(path,num,typeblur):
     def process(img):
-        img = cv.medianBlur(img, num)
         print("Image processed") # Followup for user
         file_name = os.path.basename(path).split('/')[-1]
         cv.imwrite(f"output/{file_name}", img)
-        print(f"Image '{path}' saved in output directory")
+        file_name = os.path.basename(path).split('/')[-1]
+        print(f"Image 'output/{file_name}' saved in output directory")
 
     isFile = os.path.isfile(path)
     isDirectory = os.path.isdir(path)
@@ -29,6 +29,7 @@ def blur(path,num,typeblur):
                     process(img)
                 elif typeblur == "Blur":
                     img = cv.blur(img, (num,num))
+                    process(img)
                 else:
                     print("Not valid blur") # Error input typeblur
             except cv.error:

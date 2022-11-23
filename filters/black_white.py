@@ -17,4 +17,5 @@ def black_white(path):
             print("Image processed") # Followup for user
             file_name = os.path.basename(path).split('/')[-1]
             cv.imwrite(f"output/{file_name}", img)
-            print(f"Image '{path}' saved in output directory")
+            file_name = os.path.basename(path).split('/')[-1]
+            print(f"Image 'output/{file_name}' saved in output directory")
