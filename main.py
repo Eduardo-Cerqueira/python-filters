@@ -17,4 +17,7 @@ def reprocess():
     for name in list_of_files:
         black_white.black_white(name)
         file_name = os.path.basename(name).split('/')[-1]
-        blur.blur(f"output/{file_name}", 55, "GaussianBlur")
+        newpath = f"output/{file_name}"
+        blur.blur(newpath, 55, "GaussianBlur")
+
+reprocess()
