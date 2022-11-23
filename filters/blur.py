@@ -13,13 +13,14 @@ def blur(path,num,typeblur,output):
     isFile = os.path.isfile(path)
     isDirectory = os.path.isdir(path)
     if (isFile == False and isDirectory == False):
-        print("Exception : File doesn't exit")
+        print("Exception : File or Directory doesn't exit")
     else:
-        img = cv.imread(cv.samples.findFile(path))
-        if img is None:
+        _, ext = os.path.splitext(path)
+        if ext not in [".png",".jpg",".jpeg"]:
             print("Exception : Could not read the image. Make the file is an image")
         else:
             try:
+                img = cv.imread(cv.samples.findFile(path))
                 print(f"\nProcessing '{path}'") # Followup for user
                 if typeblur == "GaussianBlur":
                     img = cv.GaussianBlur(img,(num, num),0)
