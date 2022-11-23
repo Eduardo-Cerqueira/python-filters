@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 import os
 
-def dilation(path,num):
+def dilation(path,num,output):
     isFile = os.path.isfile(path)
     isDirectory = os.path.isdir(path)
     if (isFile == False and isDirectory == False):
@@ -16,6 +16,6 @@ def dilation(path,num):
             file_name = os.path.basename(path).split('/')[-1]
             cv.imwrite(f"output/{file_name}", img)
             file_name = os.path.basename(path).split('/')[-1]
-            print(f"Image 'output/{file_name}' saved in output directory")
+            print(f"Image '{output}/{file_name}' saved in output directory")
         except ValueError:
                 print("Exception : No numbers below zero")

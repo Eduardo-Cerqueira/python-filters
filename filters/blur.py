@@ -2,13 +2,13 @@ import cv2 as cv
 import numpy as np
 import os
 
-def blur(path,num,typeblur):
+def blur(path,num,typeblur,output):
     def process(img):
         print("Image processed") # Followup for user
         file_name = os.path.basename(path).split('/')[-1]
         cv.imwrite(f"output/{file_name}", img)
         file_name = os.path.basename(path).split('/')[-1]
-        print(f"Image 'output/{file_name}' saved in output directory")
+        print(f"Image '{output}/{file_name}' saved in output directory")
 
     isFile = os.path.isfile(path)
     isDirectory = os.path.isdir(path)

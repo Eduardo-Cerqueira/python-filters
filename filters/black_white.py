@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 import os
 
-def black_white(path):
+def black_white(path,output):
     isFile = os.path.isfile(path)
     isDirectory = os.path.isdir(path)
     if (isFile == False and isDirectory == False):
@@ -18,4 +18,4 @@ def black_white(path):
             file_name = os.path.basename(path).split('/')[-1]
             cv.imwrite(f"output/{file_name}", img)
             file_name = os.path.basename(path).split('/')[-1]
-            print(f"Image 'output/{file_name}' saved in output directory")
+            print(f"Image '{output}/{file_name}' saved in output directory")
