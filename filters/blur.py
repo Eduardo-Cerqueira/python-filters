@@ -5,9 +5,9 @@ import os
 def blur(path,num,typeblur):
     def process(img):
         img = cv.medianBlur(img, num)
-        cv.imshow("Display window", img)
         print("Image processed") # Followup for user
-        cv.imwrite("output/megumin_blur.png", img)
+        file_name = os.path.basename(path).split('/')[-1]
+        cv.imwrite(f"output/{file_name}", img)
         print(f"Image '{path}' saved in output directory")
 
     isFile = os.path.isfile(path)
@@ -29,7 +29,6 @@ def blur(path,num,typeblur):
                     process(img)
                 elif typeblur == "Blur":
                     img = cv.blur(img, (num,num))
-                    process(img)
                 else:
                     print("Not valid blur") # Error input typeblur
             except cv.error:

@@ -12,9 +12,9 @@ def dilation(path,num):
             img = cv.imread(cv.samples.findFile(path))
             print(f"\nProcessing '{path}'")
             img = cv.dilate(img, np.ones((num, num), np.uint8) , 1)
-            cv.imshow("Display window", img)
             print("Image processed")
-            cv.imwrite("output/megumin_dilation.png", img)
+            file_name = os.path.basename(path).split('/')[-1]
+            cv.imwrite(f"output/{file_name}", img)
             print(f"Image '{path}' saved in output directory")
         except ValueError:
                 print("Exception : No numbers below zero")

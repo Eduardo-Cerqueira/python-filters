@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 import os
 
-def black_white_img(path):
+def black_white(path):
     isFile = os.path.isfile(path)
     isDirectory = os.path.isdir(path)
     if (isFile == False and isDirectory == False):
@@ -14,7 +14,7 @@ def black_white_img(path):
         else:
             print(f"\nProcessing '{path}'") # Followup for user
             img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-            cv.imshow("Display window", img)
             print("Image processed") # Followup for user
-            cv.imwrite("output/megumin_black_white.png", img)
+            file_name = os.path.basename(path).split('/')[-1]
+            cv.imwrite(f"output/{file_name}", img)
             print(f"Image '{path}' saved in output directory")
