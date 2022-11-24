@@ -64,7 +64,6 @@ def flag_filter(i,filters,o):
         for name in list_of_files:
             apply_filter(name,filters,o)
 
-#flag_filter("imgs","blur:5|dilate:15|grayscale","output")
 
 if __name__ == '__main__':
     try:
