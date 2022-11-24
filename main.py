@@ -1,4 +1,4 @@
-from filters import black_white, blur, dilation
+from filters import black_white, blur, dilation, gif_generator
 import os, sys, click, re
 
 
@@ -15,9 +15,10 @@ dilation.dilation("imgs/megumin.jpeg",10,"output")
 @click.command()
 @click.option('-i', default="imgs", help='--input-dir <directory>')
 @click.option('-o', default="output", help='--output-dir <directory>')
-@click.option('--filters', help="Choose filter from blur, gaussianblur, medianblur, dilate, grayscale")
+@click.option('--filters', default="None", help="Choose filter from blur, gaussianblur, medianblur, dilate, grayscale")
+@click.option('--output-format', help="Choose the name of the gif")
 
-def flag_filter(i,filters,o):
+def main(i,filters,o,output_format):
     def apply_filter(input,filtr,output):
         list_filter = []
         args = filtr.split("|")
@@ -63,10 +64,13 @@ def flag_filter(i,filters,o):
                 list_of_files.append(os.path.join(root,file))
         for name in list_of_files:
             apply_filter(name,filters,o)
+    if output_format is not None:
+        gif_generator.gif_generator(o,output_format,o)
 
+    os.system("python3 main.py --help")
 
 if __name__ == '__main__':
     try:
-        flag_filter()
+        main()
     except AttributeError:
         os.system("python3 main.py --help")
