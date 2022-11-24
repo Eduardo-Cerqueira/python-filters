@@ -1,4 +1,4 @@
-from filters import black_white, blur, dilation, gif_generator
+from filters import black_white, blur, dilation, gif_generator, img_from_video
 import os, sys, click, re
 
 
@@ -17,8 +17,9 @@ dilation.dilation("imgs/megumin.jpeg",10,"output")
 @click.option('-o', default="output", help='--output-dir <directory>')
 @click.option('--filters', default="None", help="Choose filter from blur, gaussianblur, medianblur, dilate, grayscale")
 @click.option('--output-format', help="Choose the name of the gif")
+@click.option('--video', help="Choose a video to transform into images")
 
-def main(i,filters,o,output_format):
+def main(i,filters,output_format,video,o):
     def apply_filter(input,filtr,output):
         list_filter = []
         args = filtr.split("|")
@@ -67,7 +68,8 @@ def main(i,filters,o,output_format):
     if output_format is not None:
         gif_generator.gif_generator(o,output_format,o)
 
-    os.system("python3 main.py --help")
+    if video is not None:
+        img_from_video.img_from_video(video, o)
 
 if __name__ == '__main__':
     try:
