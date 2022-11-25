@@ -7,8 +7,9 @@ def time():
     return dt_string
 
 def log_message(filename,log_file,name_log,o):
-    with open(os.path.join(o, name_log), 'a') as file:
-            file.write(f"{time()} - {filename} : {log_message}\n")
+    if log_file != None:
+        with open(os.path.join(o, log_file), 'a') as file:
+            file.write(f"{time()} - {filename} : {name_log}\n")
 
 def log_flags(i,filters,log_file,output_format,video,o):
     with open(os.path.join(o, log_file), 'a') as file:

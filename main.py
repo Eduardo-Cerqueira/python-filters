@@ -30,14 +30,18 @@ def main(i,filters,log_file,output_format,video,o):
         log_file_manage(log_file,o)
         log_flags(i,filters,log_file,output_format,video,o)
 
+
     if os.path.isdir(i) == False:
+        print("FALSE")
         apply_filter(i,filters,log_file,o)
     else:
+        print("TRUE")
         list_of_files = []
         for root, dirs, files in os.walk(i):
             for file in files:
                 list_of_files.append(os.path.join(root,file))
         for name in list_of_files:
+            print("TRUE name :", name)
             apply_filter(name,filters,log_file,o)
 
     if output_format is not None:

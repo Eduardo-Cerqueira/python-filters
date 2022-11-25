@@ -15,19 +15,19 @@ def apply_filter(input,filtr,log_file,output):
                 if c == 0:
                     blur.blur(input, int(list_filter[0][1]), "Blur", log_file, output)
                 else:
-                    blur.blur(output, int(list_filter[c][1]), "Blur", log_file, output)
+                    blur.blur(f"{output}/{file_name}", int(list_filter[c][1]), "Blur", log_file, output)
                 
             elif list_filter[c][0] == "medianblur":
                 if c == 0:
                     blur.blur(input, int(list_filter[0][1]), "MedianBlur", log_file, output)
                 else:
-                    blur.blur(output, int(list_filter[c][1]), "MedianBlur",log_file, output)
+                    blur.blur(f"{output}/{file_name}", int(list_filter[c][1]), "MedianBlur",log_file, output)
 
             elif list_filter[c][0] == "gaussianblur":
                 if c == 0:
                     blur.blur(input, int(list_filter[0][1]), "GaussianBlur",log_file, output)
                 else:
-                    blur.blur(output, int(list_filter[c][1]), "GaussianBlur",log_file, output)
+                    blur.blur(f"{output}/{file_name}", int(list_filter[c][1]), "GaussianBlur",log_file, output)
 
             elif list_filter[c][0] == "grayscale":
                 if c == 0:

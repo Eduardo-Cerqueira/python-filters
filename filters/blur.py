@@ -3,8 +3,7 @@ import cv2 as cv
 import numpy as np
 import os
 
-def blur(path,num,typeblur,log_file,output):
-    def process(img):
+def process(path,img,log_file,output):
         log_message("blur.py",log_file,"Image processed", output)
         print("Image processed") # Followup for user
         file_name = os.path.basename(path).split('/')[-1]
@@ -13,6 +12,7 @@ def blur(path,num,typeblur,log_file,output):
         print(f"Image '{output}/{file_name}' saved in output directory")
         log_message("blur.py",log_file,f"Image '{output}/{file_name}' saved in output directory", output)
 
+def blur(path,num,typeblur,log_file,output):
     isFile = os.path.isfile(path)
     isDirectory = os.path.isdir(path)
     if (isFile == False and isDirectory == False):
@@ -25,21 +25,21 @@ def blur(path,num,typeblur,log_file,output):
             print("Exception : Could not read the image. Make the file is an image")
         else:
             try:
-                log_message("blur.py",log_file,f"Processing '{path}'", output)
                 img = cv.imread(cv.samples.findFile(path))
+                log_message("blur.py",log_file,f"Processing '{path}'", output)
                 print(f"\nProcessing '{path}'") # Followup for user
                 if typeblur == "GaussianBlur":
                     log_message("blur.py",log_file,"GaussianBlur choosen", output)
                     img = cv.GaussianBlur(img,(num, num),0)
-                    process(img)
-                elif typeblur == "blur.py":
-                    log_message("MedianBlur",log_file,"MedianBlur choosen", output)
+                    process(path,img,log_file,output)
+                elif typeblur == "MedianBlur":
+                    log_message("blur.py",log_file,"MedianBlur choosen", output)
                     img = cv.medianBlur(img, num)
-                    process(img)
+                    process(path,img,log_file,output)
                 elif typeblur == "Blur":
                     log_message("blur.py",log_file,"Blur choosen", output)
                     img = cv.blur(img, (num,num))
-                    process(img)
+                    process(path,img,log_file,output)
                 else:
                     log_message("blur.py",log_file,"Not valid blur", output)
                     print("Not valid blur") # Error input typeblur

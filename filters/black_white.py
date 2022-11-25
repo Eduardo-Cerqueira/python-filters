@@ -1,7 +1,7 @@
 from log_file_manage import log_message
 import cv2 as cv
 import numpy as np
-import os
+import os, sys
 
 def black_white(path,log_file,output):
     isFile = os.path.isfile(path)
