@@ -7,40 +7,52 @@ from rich.progress import track
 import time
 
 
-def black_white(path, log_file, output):
-    """Transform image at path in gray/black-white and save it to output"""
-    is_file = os.path.isfile(path)
-    is_directory = os.path.isdir(path)
+def zeteams(input_dir, log_file, output):
+    """Add name of dev team to the image in path"""
+    is_file = os.path.isfile(input_dir)
+    is_directory = os.path.isdir(input_dir)
     if is_file is False and is_directory is False:
         log_message(
-            "black_white.py",
+            "ze_teams.py",
             log_file,
             "Exception : File or Directory doesn't exit",
             output,
         )
         print("Exception : File or Directory doesn't exit")
     else:
-        _, ext = os.path.splitext(path)
+        _, ext = os.path.splitext(input_dir)
         if ext not in [".png", ".jpg", ".jpeg"]:
             log_message(
-                "black_white.py",
+                "ze_teams.py",
                 log_file,
                 "Exception : Could not read the image. Make the file is an image",
                 output,
             )
             print("Exception : Could not read the image. Make the file is an image")
         else:
-            img = cv.imread(cv.samples.findFile(path))
-            log_message("black_white.py", log_file, f"Processing '{path}'", output)
-            print(f"\nProcessing '{path}'")  # Followup for user
-            img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-            log_message("black_white.py", log_file, "Image processed", output)
-            print("Image processed")  # Followup for user
-            file_name = os.path.basename(path).split("/")[-1]
-            cv.imwrite(f"output/{file_name}", img)
-            file_name = os.path.basename(path).split("/")[-1]
+            image = cv.imread(cv.samples.findFile(input_dir))
             log_message(
-                "black_white.py",
+                "ze_teams.py",
+                log_file,
+                f"Processing '{input_dir}'",
+                output,
+            )
+            print(f"\nProcessing '{input_dir}'")  # Followup for user
+            newimage = cv.putText(
+                img=image,
+                text="Team",
+                org=(25, 50),
+                fontFace=cv.FONT_HERSHEY_DUPLEX,
+                fontScale=1.0,
+                color=(0, 0, 0),
+            )
+            log_message("ze_teams.py", log_file, "Image processed", output)
+            print("Image processed")  # Followup for user
+            file_name = os.path.basename(input_dir).split("/")[-1]
+            cv.imwrite(f"output/{file_name}", newimage)
+            file_name = os.path.basename(input_dir).split("/")[-1]
+            log_message(
+                "ze_teams.py",
                 log_file,
                 f"Image '{output}/{file_name}' saved in output directory",
                 output,
@@ -48,5 +60,4 @@ def black_white(path, log_file, output):
             rich.progress_bar.ProgressBar(total=100, completed=0)
             for i in track(range(100), description="Processing..."):
                 time.sleep(0.01)  # Simulate work being done
-
             print(f"Image '{output}/{file_name}' saved in output directory")

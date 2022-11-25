@@ -3,6 +3,9 @@ import os
 import cv2 as cv
 import numpy as np
 from log_file_manage import log_message
+import rich
+from rich.progress import track
+import time
 
 
 def dilation(path, num, log_file, output):
@@ -44,6 +47,9 @@ def dilation(path, num, log_file, output):
                     f"Image '{output}/{file_name}' saved in output directory",
                     output,
                 )
+                rich.progress_bar.ProgressBar(total=100, completed=0)
+                for i in track(range(100), description="Processing..."):
+                    time.sleep(0.01)  # Simulate work being done
                 print(f"Image '{output}/{file_name}' saved in output directory")
             except ValueError:
                 log_message(

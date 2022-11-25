@@ -69,7 +69,6 @@ def apply_filter(input_dir, filtr, log_file, output):
                 )
         elif list_filter[number][0] == "zeteams":
             if number == 0:
-                zeteams.zeteams(input_dir, log_file,output)
+                zeteams.zeteams(input_dir, log_file, output)
             else:
                 zeteams.zeteams(f"{output}/{file_name}", log_file, output)
-        

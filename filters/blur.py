@@ -2,6 +2,9 @@
 import os
 import cv2 as cv
 from log_file_manage import log_message
+import rich
+from rich.progress import track
+import time
 
 
 def process(path, img, log_file, output):
@@ -11,6 +14,9 @@ def process(path, img, log_file, output):
     file_name = os.path.basename(path).split("/")[-1]
     cv.imwrite(f"output/{file_name}", img)
     file_name = os.path.basename(path).split("/")[-1]
+    rich.progress_bar.ProgressBar(total=100, completed=0)
+    for i in track(range(100), description="Processing..."):
+        time.sleep(0.01)  # Simulate work being done
     print(f"Image '{output}/{file_name}' saved in output directory")
     log_message(
         "blur.py",
