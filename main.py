@@ -18,7 +18,9 @@ from log_file_manage import log_file_manage, log_flags
 @click.option("--log-file", help="Log all actions in a file")
 @click.option("--output-format", help="Choose the name of the gif")
 @click.option("--video", help="Choose a video to transform into images")
-def main(i, filters, log_file, output_format, video, o):
+@click.option("--list-filters", is_flag=True, show_default=True, default=False, help="Greet the world.")
+
+def main(i, filters, log_file, output_format, list_filters, video, o):
     """Main - gather all fonctions and manages them all"""
     if os.path.isdir(o) is False:
         os.mkdir(o)
@@ -44,7 +46,21 @@ def main(i, filters, log_file, output_format, video, o):
 
     if log_file is not None:
         log_file_manage(log_file, o)
-
+    
+    if list_filters is not False:
+        click.echo('Discover all the filters ! :\n')
+        filters_dic = {
+            "blur": "blur : \nTake : Odd Number \nPun : Looking back, my entire life was just a blur until I got glasses.\n",
+            "medianblur": "medianblur : \nTake : Odd Number \nPun : Even though Math is a median of instruction, teachers can be really mean. Sometimes they enjoy students going into range mode.\n",
+            "gaussianblur": "gaussianblur : \nTake : Odd Number \nPun : .¯\_(ツ)_/¯.\n",
+            "dilate": "dilate : \nTake : odd number - \nPun : My optometrist had my pupils dilated today. It was an eye-opening experience.\n",
+            "grayscale": "grayscale : \nTake : Nothing - \nPun : Roses are gray, violets are gray. I'm colorblind, heck.\n"
+        }
+        click.echo(filters_dic["blur"])
+        click.echo(filters_dic["medianblur"])
+        click.echo(filters_dic["gaussianblur"])
+        click.echo(filters_dic["dilate"])
+        click.echo(filters_dic["grayscale"])
 
 if __name__ == "__main__":
     main()
