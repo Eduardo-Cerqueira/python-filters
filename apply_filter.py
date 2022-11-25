@@ -1,6 +1,6 @@
 """OS find and manage files"""
 import os
-from filters import black_white, blur, dilation
+from filters import black_white, blur, dilation, zeteams
 
 
 def apply_filter(input_dir, filtr, log_file, output):
@@ -67,3 +67,9 @@ def apply_filter(input_dir, filtr, log_file, output):
                     log_file,
                     output,
                 )
+        elif list_filter[number][0] == "zeteams":
+            if number == 0:
+                zeteams.zeteams(input_dir, log_file,output)
+            else:
+                zeteams.zeteams(f"{output}/{file_name}", log_file, output)
+        
