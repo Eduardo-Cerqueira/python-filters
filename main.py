@@ -2,6 +2,7 @@ from filters import black_white, blur, dilation
 from gif_generator import gif_generator
 from img_from_video import img_from_video
 from apply_filter import apply_filter
+from log_file_manage import log_file_manage, log_message, log_flags
 import os, click
 
 
@@ -25,21 +26,28 @@ dilation.dilation("imgs/megumin.jpeg",10,"output")
 
 
 def main(i,filters,log_file,output_format,video,o):
+    if log_file is not None:
+        log_file_manage(log_file,o)
+        log_flags(i,filters,log_file,output_format,video,o)
+
     if os.path.isdir(i) == False:
-        apply_filter(i,filters,o)
+        apply_filter(i,filters,log_file,o)
     else:
         list_of_files = []
         for root, dirs, files in os.walk(i):
             for file in files:
                 list_of_files.append(os.path.join(root,file))
         for name in list_of_files:
-            apply_filter(name,filters,o)
+            apply_filter(name,filters,log_file,o)
 
     if output_format is not None:
-        gif_generator(o,output_format,o)
+        gif_generator(o,output_format,log_file,o)
 
     if video is not None:
-        img_from_video(video, o)
+        img_from_video(i,video,log_file,o)
+    
+    if log_file is not None:
+        log_file_manage(log_file,o)
 
 if __name__ == '__main__':
     try:

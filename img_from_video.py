@@ -1,10 +1,12 @@
+from log_file_manage import log_message
 import cv2 as cv
 import numpy as np
 import os
 
-def frame_generate(i,name_video,o):
+def frame_generate(i,name_video,log_file,o):
+    log_message("img_from_video.py",log_file,"Processing the video ...", output)
     print("Processing the video ...")
-    cam = cv.VideoCapture("imgs/video.mp4")
+    cam = cv.VideoCapture(i)
     currentframe = 0
     
     while(True):
@@ -17,18 +19,21 @@ def frame_generate(i,name_video,o):
             break
     cam.release()
     cv.destroyAllWindows()
+    log_message("img_from_video.py",log_file,"Video processed !", output)
     print("Video processed !")
 
-def img_from_video(input,output):
+def img_from_video(input,video,output):
     isFile = os.path.isfile(input)
     isDirectory = os.path.isdir(input)
     if (isFile == False and isDirectory == False):
+        log_message("img_from_video.py",log_file,"Exception : File or Directory doesn't exit", output)
         print("Exception : File or Directory doesn't exit")
     else:
         file = os.path.basename(input).split('/')[-1]
         name_video = os.path.splitext(file)[0]
         _, ext = os.path.splitext(file)
         if ext not in [".mp4"]:
+            log_message("img_from_video.py",log_file,f"Exception : {file} is not a video", output)
             print(f"Exception : {file} is not a video")
         else:
             isFile = os.path.isfile(output)
