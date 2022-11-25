@@ -9,7 +9,7 @@ def frame_generate(input_path, name_video, log_file, output):
     message = "img_from_video.py"
     log_message(message, log_file, "Processing the video ...", output)
     print("Processing the video ...")
-    cam = cv.VideoCapture(input_path)
+    cam = cv.VideoCapture(f"{input_path}/{name_video}")
     currentframe = 0
 
     while True:
@@ -41,19 +41,22 @@ def img_from_video(input_dir, video, log_file, output):
         print("Exception : File or Directory doesn't exit")
     else:
         file_name = os.path.basename(input_dir).split("/")[-1]
-        name_video = os.path.splitext(file_name)[0]
-        _, ext = os.path.splitext(file_name)
+        name_video = os.path.splitext(video)[0]
+        _, ext = os.path.splitext(video)
         if ext not in [".mp4"]:
             log_message(
                 message,
                 log_file,
-                f"Exception : {file_name} is not a video",
+                f"Exception : {video} is not a video",
                 output,
             )
-            print(f"Exception : {file_name} is not a video")
+            log_message(
+                message, log_file, f"Exception : {video} is not a video", output
+            )
+            print(f"Exception : {video} is not a video")
         else:
             is_file += os.path.isfile(output)
             is_directory += os.path.isdir(output)
             if is_file is False and is_directory is False:
                 os.mkdir(output)
-            frame_generate(input_dir, video, name_video, output)
+            frame_generate(input_dir, video, log_file, output)

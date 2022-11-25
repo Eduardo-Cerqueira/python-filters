@@ -20,6 +20,8 @@ from log_file_manage import log_file_manage, log_flags
 @click.option("--video", help="Choose a video to transform into images")
 def main(i, filters, log_file, output_format, video, o):
     """Main - gather all fonctions and manages them all"""
+    if os.path.isdir(o) is False:
+        os.mkdir(o)
     if log_file is not None:
         log_file_manage(log_file, o)
         log_flags(i, filters, log_file, output_format, video, o)
@@ -45,7 +47,4 @@ def main(i, filters, log_file, output_format, video, o):
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except AttributeError:
-        os.system("python3 main.py --help")
+    main()
