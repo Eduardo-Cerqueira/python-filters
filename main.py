@@ -61,6 +61,7 @@ def main(i, filters, log_file, output_format, list_filters, video, o):
         click.echo(filters_dic["gaussianblur"])
         click.echo(filters_dic["dilate"])
         click.echo(filters_dic["grayscale"])
+        
 
 if __name__ == "__main__":
     main()
