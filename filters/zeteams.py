@@ -7,7 +7,7 @@ from rich.progress import track
 import time
 
 
-def zeteams(input_dir, log_file, output):
+def zeteams(input_dir, log_file, message, color_given ,output):
     """Add name of dev team to the image in path"""
     is_file = os.path.isfile(input_dir)
     is_directory = os.path.isdir(input_dir)
@@ -40,24 +40,28 @@ def zeteams(input_dir, log_file, output):
             print(f"\nProcessing '{input_dir}'")  # Followup for user
             newimage = cv.putText(
                 img=image,
-                text="Team",
+                text=message,
                 org=(25, 50),
                 fontFace=cv.FONT_HERSHEY_DUPLEX,
                 fontScale=1.0,
-                color=(0, 0, 0),
-            )
-            log_message("ze_teams.py", log_file, "Image processed", output)
-            print("Image processed")  # Followup for user
-            file_name = os.path.basename(input_dir).split("/")[-1]
-            cv.imwrite(f"output/{file_name}", newimage)
-            file_name = os.path.basename(input_dir).split("/")[-1]
-            log_message(
-                "ze_teams.py",
-                log_file,
-                f"Image '{output}/{file_name}' saved in output directory",
-                output,
-            )
-            rich.progress_bar.ProgressBar(total=100, completed=0)
-            for i in track(range(100), description="Processing..."):
-                time.sleep(0.01)  # Simulate work being done
-            print(f"Image '{output}/{file_name}' saved in output directory")
+                color=(255,0,0)
+                )
+            try:
+                file_name = os.path.basename(input_dir).split("/")[-1]
+                cv.imwrite(f"output/{file_name}", newimage)
+                log_message("ze_teams.py", log_file, "Image processed", output)
+                print("Image processed")  # Followup for user
+                log_message(
+                    "ze_teams.py",
+                    log_file,
+                    f"Image '{output}/{file_name}' saved in output directory",
+                    output,
+                )
+                rich.progress_bar.ProgressBar(total=100, completed=0)
+                for i in track(range(100), description="Processing..."):
+                    time.sleep(0.01)  # Simulate work being done
+                print(f"Image '{output}/{file_name}' saved in output directory")
+            except cv.error:
+                print("The image is not realy a image")
+                log_message("zeteams.py", log_file, "The image is not realy a image", output)
+                pass

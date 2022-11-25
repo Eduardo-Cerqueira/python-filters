@@ -33,20 +33,28 @@ def black_white(path, log_file, output):
             img = cv.imread(cv.samples.findFile(path))
             log_message("black_white.py", log_file, f"Processing '{path}'", output)
             print(f"\nProcessing '{path}'")  # Followup for user
-            img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-            log_message("black_white.py", log_file, "Image processed", output)
-            print("Image processed")  # Followup for user
-            file_name = os.path.basename(path).split("/")[-1]
-            cv.imwrite(f"output/{file_name}", img)
-            file_name = os.path.basename(path).split("/")[-1]
-            log_message(
-                "black_white.py",
-                log_file,
-                f"Image '{output}/{file_name}' saved in output directory",
-                output,
-            )
-            rich.progress_bar.ProgressBar(total=100, completed=0)
-            for i in track(range(100), description="Processing..."):
-                time.sleep(0.01)  # Simulate work being done
+            try:
+                img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+            except cv.error:
+                print("The image is not realy a image")
+                log_message("black_white.py", log_file, "The image is not realy a image", output)
+                pass
+            try:
+                file_name = os.path.basename(path).split("/")[-1]
+                cv.imwrite(f"output/{file_name}", img)
+                log_message("black_white.py", log_file, "Image processed", output)
+                print("Image processed")  # Followup for user
+                file_name = os.path.basename(path).split("/")[-1]
+                log_message(
+                    "black_white.py",
+                    log_file,
+                    f"Image '{output}/{file_name}' saved in output directory",
+                    output,
+                )
+                rich.progress_bar.ProgressBar(total=100, completed=0)
+                for i in track(range(100), description="Processing..."):
+                    time.sleep(0.01)  # Simulate work being done
 
-            print(f"Image '{output}/{file_name}' saved in output directory")
+                print(f"Image '{output}/{file_name}' saved in output directory")
+            except cv.error:
+                pass

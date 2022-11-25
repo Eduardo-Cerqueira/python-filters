@@ -69,7 +69,7 @@ def blur(path, num, typeblur, log_file, output):
                 log_message(
                     "blur.py",
                     log_file,
-                    "Exception : No even numbers or numbers below zero",
+                    "Exception : No even numbers or numbers below zero / file is not really an image",
                     output,
                 )
-                print("Exception : No even numbers or numbers below zero")
+                print("Exception : No even numbers or numbers below zero / file is not really an image")
