@@ -6,6 +6,11 @@ from img_from_video import img_from_video
 from apply_filter import apply_filter
 from log_file_manage import log_file_manage, log_flags
 
+content = file_tr.readlines()
+file_tr = open(f"{o}/{config_file}", "w+")
+o = content[1]
+i = content[0]
+filters = content[2]
 
 @click.command()
 @click.option("-i", default=f"{'imgs'}", help="--input-dir <directory>")
@@ -33,13 +38,16 @@ def main(i, filters, log_file, output_format, config_file, list_filters, video, 
 
     is_file = os.path.isfile(f"{output_format}/{log_file}")
 
-    if config_file is not None:
-        filetr = open("ConfigFile.ini", "r")
-        content = filetr.readlines()
-        i = content[0]
-        o = content[1]
-        filters = content[2]
-        print(filetr)
+    is_file = os.path.isfile(f"{o}/{config_file}")
+    file_tr = open(f"{o}/{config_file}", "w+")
+    if is_file is False:
+        with open(f"{o}/{config_file}", "x") as G:
+            print(G.read())
+
+    content = file_tr.readlines()
+    i = content[0]
+    o = content[1]
+    filters = content[2]
 
     if log_file:
         log_file_manage(log_file, o)
@@ -56,7 +64,7 @@ def main(i, filters, log_file, output_format, config_file, list_filters, video, 
             apply_filter(name, filters, log_file, o)
 
     if output_format is not None:
-        gif_generator(o, output_format, log_file, o)
+        gif_generator(i, output_format, log_file, o)
 
     if video is not None:
         img_from_video(i, video, log_file, o)

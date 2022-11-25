@@ -45,6 +45,6 @@ def gif_generator(
                 format="GIF",
                 append_images=images[1:],
                 save_all=True,
-                duration=500,
+                duration=50,
                 loop=0,
             )

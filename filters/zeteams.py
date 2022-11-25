@@ -37,6 +37,11 @@ def zeteams(input_dir, log_file, message, color_given ,output):
                 f"Processing '{input_dir}'",
                 output,
             )
+            list_rgb = []
+            args = color_given.split(",")
+            for val_e in range(len(args)):
+                list_rgb.append(args[val_e])
+
             print(f"\nProcessing '{input_dir}'")  # Followup for user
             newimage = cv.putText(
                 img=image,
@@ -44,7 +49,7 @@ def zeteams(input_dir, log_file, message, color_given ,output):
                 org=(25, 50),
                 fontFace=cv.FONT_HERSHEY_DUPLEX,
                 fontScale=1.0,
-                color=(255,0,0)
+                color=(int(list_rgb[0]),int(list_rgb[1]),int(list_rgb[2]))
                 )
             try:
                 file_name = os.path.basename(input_dir).split("/")[-1]
