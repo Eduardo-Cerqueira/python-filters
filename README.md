@@ -20,8 +20,8 @@ black filename.py
 #### - Using package pylint ✨
 Good for finding useless code
 
-[pylint](https://pylint.org/#install)
-[flake8](flake)
+[pylint](https://pylint.org/#install)\
+[flake8](https://flake8.pycqa.org/en/latest/)
 
 ### 3. Unit tests !
 #### - Using package unittest or pytest 🧪
