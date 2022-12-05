@@ -21,7 +21,7 @@ black filename.py
 Good for finding useless code
 
 [pylint](https://pylint.org/#install)
-[flake8]flake
+[flake8](flake)
 
 ### 3. Unit tests !
 #### - Using package unittest or pytest 🧪
