@@ -1,4 +1,8 @@
 # Project Image Filter Python
+
+Simple python program to apply blur, gaussian blur, median blur, dilate, grayscale using only CLI interface.
+
+
 ## 1. Install dependencies :
 
 - pip install -r requirements.txt
